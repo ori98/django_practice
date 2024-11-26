@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ question.question_text }}</title>
+</head>
+<body>
+    <h1>{{ question.question_text }}</h1>
+    <p>Published on: {{ question.pub_date }}</p>
+
+    <h2>Choices</h2>
+    <form method="post" action="/vote/">
+        {% csrf_token %}
+        {% for choice in question.choices %}
+            <input type="radio" name="choice" value="{{ choice.id }}">
+            {{ choice.choice_text }}<br>
+        {% endfor %}
+        <button type="submit">Vote</button>
+    </form>
+</body>
+</html>
